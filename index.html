@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruna Lelis do Prado</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0ecfa;
+  --bg2:#e8e0f5;
+  --surface:#fff;
+  --deep:#1a0533;
+  --accent:#7c3aed;
+  --accent2:#a855f7;
+  --light:#e9d5ff;
+  --muted:#7c6f9a;
+  --text:#1a0533;
+  --radius:16px;
+  --shadow:0 8px 32px rgba(124,58,237,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 3.5rem;
+  background:rgba(240,236,250,0.85);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(124,58,237,.1);
+}
+.nav-logo{font-family:'Unbounded',sans-serif;font-size:.85rem;color:var(--deep);text-decoration:none;letter-spacing:.05em;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.8rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* SHARED */
+.sw{max-width:1280px;margin:0 auto;padding:6rem 3.5rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;}
+.big-heading{font-family:'Unbounded',sans-serif;font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;line-height:1.1;color:var(--deep);margin-bottom:2rem;}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* BUTTONS */
+.btn{display:inline-block;background:var(--deep);color:#fff;padding:.85rem 2.2rem;border-radius:99px;font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:all .3s;}
+.btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.35);}
+.btn-purple{display:inline-block;background:var(--accent);color:#fff;padding:.85rem 2.2rem;border-radius:99px;font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .3s;border:none;cursor:pointer;}
+.btn-purple:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.4);}
+.btn-ghost{display:inline-block;background:transparent;color:var(--deep);padding:.85rem 2.2rem;border-radius:99px;border:2px solid rgba(26,5,51,.25);font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .3s;}
+.btn-ghost:hover{background:var(--deep);color:#fff;transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:var(--deep);padding:2.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:'Unbounded',sans-serif;font-size:.85rem;color:#fff;}
+.footer-links{display:flex;gap:2rem;}
+.footer-links a{font-size:.75rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:#fff;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.35);}
+
+@media(max-width:860px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  .sw{padding:4rem 1.5rem;}
+  footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2rem 1.5rem;}
+}
+</style>
+
+<style>
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,#f0ecfa 0%,#e8e0f5 50%,#ddd5f0 100%);
+  display:flex;flex-direction:column;
+}
+
+/* Title — two lines, massive, behind photo */
+.hero-title{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  z-index:1;
+  pointer-events:none;
+  user-select:none;
+  top:18%;
+}
+.hero-title .line1{
+  display:block;
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(1rem,2.8vw,2.6rem);
+  font-weight:700;
+  color:var(--deep);
+  letter-spacing:.18em;
+  opacity:.7;
+  line-height:1.3;
+}
+.hero-title .line2{
+  display:block;
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(3.5rem,12vw,12rem);
+  font-weight:900;
+  color:var(--deep);
+  letter-spacing:-.03em;
+  line-height:.92;
+  opacity:.88;
+}
+
+/* Photo */
+.hero-img-wrap{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  width:min(460px,58vw);
+}
+.hero-img{width:100%;display:block;}
+
+/* ── FLOATING WIDGETS ── */
+.widget{
+  position:absolute;
+  z-index:4;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(124,58,237,.14);
+  border-radius:20px;
+  box-shadow:0 12px 48px rgba(124,58,237,.14), 0 2px 8px rgba(0,0,0,.06);
+  animation:widgetFloat 5s ease-in-out infinite;
+}
+@keyframes widgetFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+
+/* 1. PHONE CALL CARD — bottom left */
+.w-call{
+  left:4%;bottom:22%;
+  padding:1rem 1.4rem;
+  display:flex;align-items:center;gap:1rem;
+  width:min(280px,36vw);
+  animation-delay:0s;
+  border-radius:99px;
+}
+.w-call-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+  overflow:hidden;
+}
+.w-call-avatar img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.w-call-info{flex:1;min-width:0;}
+.w-call-name{font-family:'Unbounded',sans-serif;font-size:.75rem;font-weight:700;color:var(--deep);white-space:nowrap;}
+.w-call-sub{font-size:.65rem;color:var(--muted);margin-top:.1rem;}
+.w-call-btns{display:flex;gap:.5rem;}
+.w-call-btn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;border:none;}
+.w-call-btn.decline{background:#ff3b30;}
+.w-call-btn.accept{background:#34c759;}
+
+/* 2. SKILLS LIST — right side */
+.w-skills{
+  right:4%;top:22%;
+  width:min(220px,28vw);
+  padding:0;overflow:hidden;
+  animation-delay:.7s;
+}
+.w-skills-head{
+  background:var(--deep);color:#fff;
+  font-family:'Unbounded',sans-serif;
+  font-size:.65rem;font-weight:700;letter-spacing:.12em;
+  padding:.85rem 1.2rem;
+}
+.w-sk-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.58rem 1.1rem;
+  border-bottom:1px solid rgba(124,58,237,.07);
+  font-size:.75rem;font-weight:500;color:var(--text);
+}
+.w-sk-row:last-child{border-bottom:none;}
+.w-sk-row.active{color:var(--accent);font-weight:700;background:rgba(124,58,237,.04);}
+.w-sk-star{font-size:.7rem;color:var(--light);}
+.w-sk-row.active .w-sk-star{color:var(--accent);}
+
+/* 3. BIO CARD — bottom left, above call */
+.w-bio{
+  left:4%;top:18%;
+  width:min(260px,33vw);
+  padding:1.4rem 1.5rem;
+  animation-delay:1.2s;
+}
+.w-bio-title{font-family:'Unbounded',sans-serif;font-size:.75rem;font-weight:900;color:var(--deep);margin-bottom:.6rem;}
+.w-bio-text{font-size:.74rem;color:var(--muted);line-height:1.65;}
+.w-bio-link{
+  display:inline-block;margin-top:.9rem;
+  font-size:.74rem;font-weight:700;color:var(--accent);
+  text-decoration:none;
+}
+.w-bio-link:hover{text-decoration:underline;}
+
+/* 4. BROWSER BAR — bottom center-right */
+.w-browser{
+  right:4%;bottom:18%;
+  padding:.7rem 1rem;
+  display:flex;align-items:center;gap:.7rem;
+  width:min(260px,32vw);
+  animation-delay:.4s;
+  border-radius:12px;
+}
+.w-browser-dots{display:flex;gap:.3rem;}
+.w-browser-dot{width:9px;height:9px;border-radius:50%;}
+.w-browser-dot:nth-child(1){background:#ff5f57;}
+.w-browser-dot:nth-child(2){background:#febc2e;}
+.w-browser-dot:nth-child(3){background:#28c840;}
+.w-browser-url{
+  flex:1;background:rgba(124,58,237,.08);
+  border-radius:6px;padding:.3rem .7rem;
+  font-size:.68rem;color:var(--muted);font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.w-browser-reload{font-size:.8rem;color:var(--muted);cursor:pointer;}
+
+/* PILL STRIP */
+.hero-pills{
+  position:absolute;bottom:2%;left:50%;
+  transform:translateX(-50%);z-index:4;
+  display:flex;gap:.5rem;white-space:nowrap;
+}
+.hpill{
+  background:rgba(255,255,255,.8);backdrop-filter:blur(10px);
+  border:1px solid rgba(124,58,237,.2);border-radius:99px;
+  font-size:.65rem;font-weight:600;color:var(--muted);
+  padding:.35rem .9rem;letter-spacing:.04em;
+}
+
+/* STAT BUBBLE */
+.w-stat{
+  padding:.8rem 1.2rem;
+  display:flex;align-items:center;gap:.8rem;
+  animation-delay:.9s;
+  border-radius:14px;
+}
+.w-stat-n{font-family:'Unbounded',sans-serif;font-size:1.8rem;font-weight:900;color:var(--deep);line-height:1;}
+.w-stat-t{font-size:.67rem;color:var(--muted);line-height:1.4;}
+.w-stat-t strong{display:block;font-size:.75rem;color:var(--deep);font-weight:700;}
+.w-gpa{left:4%;bottom:38%;}
+.w-proj{right:4%;bottom:38%;}
+
+/* ════════════════════════════════
+   ABOUT
+════════════════════════════════ */
+#about-s{background:var(--deep);}
+.about-inner{
+  max-width:1280px;margin:0 auto;padding:6rem 3.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.about-stats-block{display:flex;flex-direction:column;gap:1.1rem;}
+.as-row{
+  display:flex;align-items:center;gap:1.4rem;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:1.3rem 1.7rem;transition:all .3s;
+}
+.as-row:hover{background:rgba(124,58,237,.2);border-color:rgba(168,85,247,.4);}
+.as-num{font-family:'Unbounded',sans-serif;font-size:2rem;font-weight:900;color:var(--accent2);line-height:1;flex-shrink:0;width:75px;}
+.as-info strong{display:block;font-size:.87rem;color:#fff;font-weight:600;margin-bottom:.18rem;}
+.as-info span{font-size:.74rem;color:rgba(255,255,255,.42);}
+.about-right .eyebrow{color:var(--accent2);}
+.about-right .big-heading{color:#fff;font-size:clamp(1.9rem,3vw,2.7rem);}
+.about-right p{color:rgba(255,255,255,.55);line-height:1.85;font-size:.92rem;margin-bottom:1rem;}
+.about-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem;}
+.about-tag{font-size:.68rem;font-weight:600;padding:.32rem .85rem;border-radius:99px;border:1px solid rgba(168,85,247,.3);color:var(--accent2);background:rgba(168,85,247,.1);}
+.about-ctas{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;}
+.btn-ghost-light{display:inline-block;background:transparent;color:rgba(255,255,255,.7);padding:.85rem 2.2rem;border-radius:99px;border:2px solid rgba(255,255,255,.2);font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .3s;}
+.btn-ghost-light:hover{border-color:rgba(255,255,255,.6);color:#fff;transform:translateY(-2px);}
+
+/* ════════════════════════════════
+   SKILLS — bento
+════════════════════════════════ */
+#skills-s{background:var(--bg2);}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:1rem;}
+.bc{background:var(--surface);border:1px solid rgba(124,58,237,.1);border-radius:var(--radius);padding:1.4rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:all .3s;}
+.bc:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--accent2);}
+.bc.wide{grid-column:span 2;}
+.bc.purple{background:var(--accent);}
+.bc.dark{background:var(--deep);}
+.bc.lavender{background:var(--light);}
+.bc-ghost{position:absolute;top:-12px;right:-8px;font-family:'Unbounded',sans-serif;font-size:5rem;font-weight:900;opacity:.055;pointer-events:none;line-height:1;color:var(--deep);}
+.bc.purple .bc-ghost,.bc.dark .bc-ghost{color:#fff;opacity:.07;}
+.bc-icon{font-size:1.9rem;margin-bottom:.55rem;}
+.bc-name{font-family:'Unbounded',sans-serif;font-size:.7rem;font-weight:700;color:var(--deep);letter-spacing:.04em;}
+.bc.purple .bc-name,.bc.dark .bc-name{color:#fff;}
+.bc.lavender .bc-name{color:#4a1e8a;}
+.bc-sub{font-size:.68rem;color:var(--muted);margin-top:.2rem;}
+.bc.purple .bc-sub,.bc.dark .bc-sub{color:rgba(255,255,255,.58);}
+.bc.lavender .bc-sub{color:#6b3fa0;}
+
+/* ════════════════════════════════
+   EXPERIENCE
+════════════════════════════════ */
+#exp-s{background:var(--bg);}
+.exp-list{display:flex;flex-direction:column;gap:1.3rem;}
+.exp-card{
+  background:var(--surface);border:1px solid rgba(124,58,237,.1);
+  border-radius:var(--radius);padding:2rem 2.4rem;
+  display:grid;grid-template-columns:68px 1fr auto;
+  align-items:start;gap:1.5rem;transition:all .3s;
+}
+.exp-card:hover{border-color:var(--accent2);box-shadow:var(--shadow);transform:translateX(6px);}
+.exp-n{font-family:'Unbounded',sans-serif;font-size:2.4rem;font-weight:900;color:var(--light);line-height:1;}
+.exp-role{font-family:'Unbounded',sans-serif;font-size:.84rem;font-weight:700;color:var(--deep);margin-bottom:.28rem;}
+.exp-co{font-size:.78rem;color:var(--accent);font-weight:600;margin-bottom:.75rem;}
+.exp-bul{list-style:none;display:flex;flex-direction:column;gap:.38rem;}
+.exp-bul li{font-size:.8rem;color:var(--muted);padding-left:1rem;position:relative;line-height:1.6;}
+.exp-bul li::before{content:'—';position:absolute;left:0;color:var(--light);}
+.exp-date{font-size:.68rem;font-weight:600;color:var(--muted);white-space:nowrap;text-align:right;padding-top:.3rem;letter-spacing:.04em;}
+
+/* ════════════════════════════════
+   EDUCATION
+════════════════════════════════ */
+#edu-s{background:var(--bg2);}
+.edu-card{
+  background:var(--deep);border-radius:22px;padding:3.5rem;color:#fff;
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+  position:relative;overflow:hidden;
+}
+.edu-card::before{content:'FSU';position:absolute;bottom:-40px;right:-15px;font-family:'Unbounded',sans-serif;font-size:11rem;font-weight:900;color:rgba(255,255,255,.03);pointer-events:none;line-height:1;}
+.edu-school{font-family:'Unbounded',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:.45rem;}
+.edu-deg{font-size:.9rem;color:var(--accent2);font-weight:600;margin-bottom:.22rem;}
+.edu-meta{font-size:.76rem;color:rgba(255,255,255,.42);margin-bottom:1.7rem;}
+.edu-bs{display:flex;flex-wrap:wrap;gap:.4rem;}
+.edu-b{font-size:.64rem;font-weight:600;padding:.3rem .8rem;border-radius:99px;background:rgba(168,85,247,.18);color:var(--accent2);border:1px solid rgba(168,85,247,.26);}
+.edu-cl{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.85rem;}
+.edu-courses{display:flex;flex-direction:column;gap:.4rem;}
+.edu-cr{font-size:.78rem;color:rgba(255,255,255,.58);padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.edu-cr:last-child{border-bottom:none;}
+
+/* ════════════════════════════════
+   ACHIEVEMENTS + CERTS
+════════════════════════════════ */
+#extra-s{background:var(--bg);}
+.extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+.block-title{font-family:'Unbounded',sans-serif;font-size:.73rem;font-weight:700;color:var(--deep);letter-spacing:.09em;text-transform:uppercase;margin-bottom:1.1rem;padding-bottom:.65rem;border-bottom:2px solid var(--light);}
+.ach-list,.cert-list{display:flex;flex-direction:column;gap:.8rem;}
+.ach-item,.cert-item{background:var(--surface);border:1px solid rgba(124,58,237,.1);border-radius:12px;padding:1.1rem 1.4rem;transition:all .3s;}
+.ach-item:hover,.cert-item:hover{border-color:var(--accent2);transform:translateX(5px);}
+.ach-t{font-size:.84rem;font-weight:700;color:var(--deep);margin-bottom:.15rem;}
+.ach-s{font-size:.69rem;color:var(--accent);font-weight:600;margin-bottom:.32rem;letter-spacing:.04em;}
+.ach-d{font-size:.75rem;color:var(--muted);line-height:1.55;}
+.cert-item{display:flex;align-items:center;gap:.9rem;}
+.cert-ic{font-size:1.6rem;flex-shrink:0;}
+.cert-n{font-size:.82rem;font-weight:700;color:var(--deep);}
+.cert-is{font-size:.68rem;color:var(--accent);font-weight:600;margin-top:.15rem;}
+
+/* ════════════════════════════════
+   PORTFOLIO STRIPE
+════════════════════════════════ */
+#port-s{background:var(--accent);overflow:hidden;position:relative;}
+#port-s::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none;}
+.port-inner{max-width:1280px;margin:0 auto;padding:5.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;}
+.port-left .eyebrow{color:rgba(255,255,255,.65);}
+.port-left .big-heading{color:#fff;margin-bottom:0;}
+.port-left p{color:rgba(255,255,255,.62);font-size:.9rem;line-height:1.7;margin-top:.8rem;max-width:400px;}
+.port-num{font-family:'Unbounded',sans-serif;font-size:7rem;font-weight:900;color:rgba(255,255,255,.14);line-height:1;}
+.port-ctas{display:flex;gap:1rem;margin-top:2rem;}
+.btn-white{display:inline-block;background:#fff;color:var(--accent);padding:.85rem 2.2rem;border-radius:99px;font-family:'Sora',sans-serif;font-size:.82rem;font-weight:700;text-decoration:none;transition:all .3s;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.16);}
+.btn-gw{display:inline-block;background:transparent;color:#fff;padding:.85rem 2.2rem;border-radius:99px;border:2px solid rgba(255,255,255,.4);font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .3s;}
+.btn-gw:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);}
+
+/* ════════════════════════════════
+   CONTACT
+════════════════════════════════ */
+#contact-s{background:var(--bg2);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:start;}
+.cta-heading{font-family:'Unbounded',sans-serif;font-size:clamp(1.5rem,2.8vw,2.4rem);font-weight:900;color:var(--deep);line-height:1.18;margin-bottom:1.2rem;}
+.cta-heading em{font-style:normal;color:var(--accent);}
+.contact-links{display:flex;flex-direction:column;gap:.55rem;margin-top:1.8rem;}
+.cl{display:flex;align-items:center;gap:.9rem;text-decoration:none;color:var(--muted);font-size:.83rem;font-weight:500;padding:.62rem 1rem;border-radius:10px;transition:all .25s;}
+.cl:hover{background:rgba(124,58,237,.08);color:var(--accent);transform:translateX(5px);}
+.cl-ic{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid rgba(124,58,237,.13);display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0;}
+.contact-form{background:var(--surface);border-radius:20px;padding:2.4rem;border:1px solid rgba(124,58,237,.12);display:flex;flex-direction:column;gap:.85rem;}
+.cf-title{font-family:'Unbounded',sans-serif;font-size:.86rem;font-weight:700;color:var(--deep);margin-bottom:.3rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+.fg{display:flex;flex-direction:column;gap:.3rem;}
+.fg label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.fg input,.fg textarea{background:var(--bg2);border:1.5px solid rgba(124,58,237,.12);color:var(--text);padding:.82rem 1rem;font-family:'Sora',sans-serif;font-size:.86rem;outline:none;border-radius:10px;transition:border-color .25s;resize:none;}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent);}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-inner,.contact-grid,.edu-card,.extra-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .bento{grid-template-columns:1fr 1fr;}
+  .bc.wide{grid-column:span 2;}
+  .exp-card{grid-template-columns:auto 1fr auto;gap:1rem;}
+  .port-inner{flex-direction:column;gap:2rem;}
+  .widget{display:none;}
+  .hero-img-wrap{width:min(360px,78vw);}
+  .hero-pills{display:none;}
+}
+@media(max-width:600px){
+  .bento{grid-template-columns:1fr;}
+  .bc.wide{grid-column:span 1;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">BL.</a>
+  <ul class="nav-links">
+    <li><a href="#about-s">About</a></li>
+    <li><a href="#skills-s">Skills</a></li>
+    <li><a href="#exp-s">Experience</a></li>
+    <li><a href="#edu-s">Education</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="#contact-s">Contact</a></li>
+  </ul>
+</nav>
+
+
+<!-- ══════════════ HERO ══════════════ -->
+<div id="hero">
+
+  <!-- Title sits behind photo -->
+  <div class="hero-title">
+    <span class="line1">IT GRADUATE &amp; </span>
+    <span class="line2">DATA ANALYST</span>
+  </div>
+
+  <!-- Centered photo -->
+  <div class="hero-img-wrap">
+    <img class="hero-img" src="hero.png" alt="Bruna Lelis do Prado">
+  </div>
+
+  <!-- 1. PHONE CALL CARD -->
+  <div class="widget w-call">
+    <div class="w-call-avatar">
+      <img src="headshot.jpg" alt="Bruna">
+    </div>
+    <div class="w-call-info">
+      <div class="w-call-name">Bruna Lelis</div>
+      <div class="w-call-sub">brulp2003@gmail.com</div>
+    </div>
+    <div class="w-call-btns">
+      <button class="w-call-btn decline">📵</button>
+      <button class="w-call-btn accept">📞</button>
+    </div>
+  </div>
+
+  <!-- 2. SKILLS LIST -->
+  <div class="widget w-skills">
+    <div class="w-skills-head">SKILLS</div>
+    <div class="w-sk-row active"><span>Python</span><span class="w-sk-star">★</span></div>
+    <div class="w-sk-row"><span>SQL</span><span class="w-sk-star">★</span></div>
+    <div class="w-sk-row"><span>Data Analytics</span><span class="w-sk-star">★</span></div>
+    <div class="w-sk-row active"><span>Excel Advanced</span><span class="w-sk-star">★</span></div>
+    <div class="w-sk-row"><span>AI / ML</span><span class="w-sk-star">★</span></div>
+  </div>
+
+  <!-- 3. BIO CARD -->
+  <div class="widget w-bio">
+    <div class="w-bio-title">IT Graduate, Data Analyst</div>
+    <p class="w-bio-text">FSU grad skilled in Python, SQL, and Excel — passionate about turning data into decisions and growing into AI/ML.</p>
+    <a class="w-bio-link" href="#contact-s">Available for opportunities →</a>
+  </div>
+
+  <!-- 4. BROWSER BAR -->
+  <div class="widget w-browser">
+    <div class="w-browser-dots">
+      <div class="w-browser-dot"></div>
+      <div class="w-browser-dot"></div>
+      <div class="w-browser-dot"></div>
+    </div>
+    <div class="w-browser-url">brunalelisdoprado.com</div>
+    <span class="w-browser-reload">↻</span>
+  </div>
+
+  <!-- Stat bubbles -->
+  <div class="widget w-stat w-gpa">
+    <div class="w-stat-n">3.96</div>
+    <div class="w-stat-t"><strong>GPA</strong>President's List</div>
+  </div>
+  <div class="widget w-stat w-proj">
+    <div class="w-stat-n">5</div>
+    <div class="w-stat-t"><strong>Projects</strong>AI · Data · UX</div>
+  </div>
+
+  <!-- Pill strip -->
+  <div class="hero-pills">
+    <span class="hpill">Information Technology</span>
+    <span class="hpill">Data Analytics Minor</span>
+    <span class="hpill">Bilingual EN / PT</span>
+    <span class="hpill">FSU Class of 2026</span>
+  </div>
+</div>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<div id="about-s">
+<div class="about-inner">
+  <div class="about-stats-block reveal">
+    <div class="as-row"><div class="as-num">3.96</div><div class="as-info"><strong>GPA — President's List</strong><span>Fall 2024 · Spring 2025 · Fall 2025</span></div></div>
+    <div class="as-row"><div class="as-num">5</div><div class="as-info"><strong>Projects Built</strong><span>AI/ML · Data Analytics · UX · Social Media</span></div></div>
+    <div class="as-row"><div class="as-num">3</div><div class="as-info"><strong>Certifications</strong><span>Anthropic · Google AI · Google Data Analytics</span></div></div>
+    <div class="as-row"><div class="as-num">2</div><div class="as-info"><strong>Languages</strong><span>English (Fluent) · Portuguese (Native)</span></div></div>
+  </div>
+  <div class="about-right reveal">
+    <div class="eyebrow">Who I Am</div>
+    <div class="big-heading">Bruna Lelis<br>do Prado.</div>
+    <p>I'm a recent FSU graduate with a B.S. in Information Technology and a Minor in Data Analytics. I combine technical skills in Python, SQL and Excel with strong communication and a constant drive to grow.</p>
+    <p>I maintained a 3.956 GPA, earned the President's List every eligible semester, and built projects spanning MRI reconstruction, CNNs, and social media analytics across 12 Florida universities.</p>
+    <div class="about-tags">
+      <span class="about-tag">3.956 GPA</span>
+      <span class="about-tag">President's List</span>
+      <span class="about-tag">Merit Scholarship</span>
+      <span class="about-tag">English · Portuguese</span>
+      <span class="about-tag">Open to Relocation</span>
+    </div>
+    <div class="about-ctas">
+      <a href="portfolio.html" class="btn-purple">See My Projects</a>
+      <a href="#contact-s" class="btn-ghost-light">Get In Touch</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════ SKILLS ══════════════ -->
+<div id="skills-s">
+<div class="sw">
+  <div class="eyebrow reveal">What I Work With</div>
+  <div class="big-heading reveal">Technical Skills.</div>
+  <div class="bento reveal">
+    <div class="bc purple wide"><div class="bc-ghost">PY</div><div class="bc-icon">🐍</div><div class="bc-name">Python</div><div class="bc-sub">pandas · NumPy · SciPy</div></div>
+    <div class="bc"><div class="bc-ghost">SQL</div><div class="bc-icon">🗄️</div><div class="bc-name">SQL</div><div class="bc-sub">MS SQL Server</div></div>
+    <div class="bc"><div class="bc-ghost">XL</div><div class="bc-icon">📊</div><div class="bc-name">Excel</div><div class="bc-sub">Advanced · Power Query</div></div>
+    
+    <div class="bc lavender"><div class="bc-icon">🗃️</div><div class="bc-name">MS Access</div><div class="bc-sub">Database Design</div></div>
+    <div class="bc"><div class="bc-icon">🤖</div><div class="bc-name">AI / ML</div><div class="bc-sub">Currently Learning</div></div>
+    <div class="bc"><div class="bc-icon">📈</div><div class="bc-name">Data Analytics</div><div class="bc-sub">Visualization · EDA</div></div>
+    <div class="bc"><div class="bc-icon">🎨</div><div class="bc-name">UX Design</div><div class="bc-sub">Information Architecture</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════ EXPERIENCE ══════════════ -->
+<div id="exp-s">
+<div class="sw">
+  <div class="eyebrow reveal">Career Journey</div>
+  <div class="big-heading reveal">Work Experience.</div>
+  <div class="exp-list">
+    <div class="exp-card reveal">
+      <div class="exp-n">01</div>
+      <div><div class="exp-role">Barista Lead</div><div class="exp-co">Aramark · Tallahassee, FL</div>
+      <ul class="exp-bul"><li>Led a team of 6 in a high-traffic campus café; onboarded 4+ new hires and built structured workflows that cut ramp-up time</li><li>Coordinated daily operations and maintained service quality during peak hours</li></ul></div>
+      <div class="exp-date">Jul 2024<br>Dec 2025</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-n">02</div>
+      <div><div class="exp-role">Clerk, Campus Administration</div><div class="exp-co">Miami Dade College · Miami, FL</div>
+      <ul class="exp-bul"><li>Built Excel tracking systems supporting 10+ concurrent campus events per week</li><li>Maintained 200+ contracts with 100% accuracy; streamlined workflows for a 5-person admin team</li></ul></div>
+      <div class="exp-date">Nov 2023<br>May 2024</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-n">03</div>
+      <div><div class="exp-role">Coding & Technology Tutor</div><div class="exp-co">Miami Dade College (EnTec) · Miami, FL</div>
+      <ul class="exp-bul"><li>Tutored 10+ undergrads in introductory coding and Microsoft 365, tailoring explanations to each learner's needs</li></ul></div>
+      <div class="exp-date">Sep 2023<br>Nov 2023</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════ EDUCATION ══════════════ -->
+<div id="edu-s">
+<div class="sw">
+  <div class="eyebrow reveal">Academic Background</div>
+  <div class="big-heading reveal">Education.</div>
+  <div class="edu-card reveal">
+    <div>
+      <div class="edu-school">Florida State University</div>
+      <div class="edu-deg">B.S. Information Technology</div>
+      <div class="edu-meta">Minor in Data Analytics · GPA 3.956 · May 2024 – May 2026</div>
+      <div class="edu-bs"><span class="edu-b">President's List</span><span class="edu-b">Dean's List</span><span class="edu-b">Merit Scholarship</span></div>
+    </div>
+    <div>
+      <div class="edu-cl">Relevant Coursework</div>
+      <div class="edu-courses">
+        <div class="edu-cr">Data Mining & Analytics</div>
+        <div class="edu-cr">Python Programming</div>
+        <div class="edu-cr">UX Design</div>
+        <div class="edu-cr">Social Media Management</div>
+        <div class="edu-cr">Research & Data Analysis</div>
+        <div class="edu-cr">Computational Probabilistic Modeling</div>
+        <div class="edu-cr">IT Leadership</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════ ACHIEVEMENTS + CERTS ══════════════ -->
+<div id="extra-s">
+<div class="sw">
+  <div class="extra-grid reveal">
+    <div>
+      <div class="block-title">Achievements</div>
+      <div class="ach-list">
+        <div class="ach-item"><div class="ach-t">President's List</div><div class="ach-s">FSU · Fall 2024 · Spring 2025 · Fall 2025</div><div class="ach-d">Achieved a 4.0 GPA across 3 semesters, totaling 36+ credit hours of letter-graded coursework.</div></div>
+        <div class="ach-item"><div class="ach-t">Dean's List</div><div class="ach-s">FSU · Summer 2024</div><div class="ach-d">Recognized for strong academic performance.</div></div>
+        <div class="ach-item"><div class="ach-t">Merit Scholarship</div><div class="ach-s">FSU · Fall 2024 – Fall 2025</div><div class="ach-d">Four consecutive semesters of academic excellence.</div></div>
+        <div class="ach-item"><div class="ach-t">Bilingual Professional</div><div class="ach-s">English (Fluent) · Portuguese (Native)</div><div class="ach-d">Effective communicator across both languages.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="block-title">Certifications</div>
+      <div class="cert-list">
+        <div class="cert-item"><div class="cert-ic">🧠</div><div><div class="cert-n">AI Fluency: Framework & Foundations</div><div class="cert-is">Anthropic · Apr 2026 · ID: 6evvp9pwhiou</div></div></div>
+        <div class="cert-item"><div class="cert-ic">🔵</div><div><div class="cert-n">AI Fundamentals</div><div class="cert-is">Google · Apr 2026 · ID: CLPCBOZC5VIE</div></div></div>
+        <div class="cert-item"><div class="cert-ic">📊</div><div><div class="cert-n">Data Analytics Foundations</div><div class="cert-is">Google · May 2026</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════ PORTFOLIO ══════════════ -->
+<div id="port-s">
+<div class="port-inner reveal">
+  <div class="port-left">
+    <div class="eyebrow">My Work</div>
+    <div class="big-heading">Career Portfolio.</div>
+    <p>From MRI reconstruction pipelines to social media analytics across 12 Florida universities — five projects that show what I can do.</p>
+    <div class="port-ctas">
+      <a href="portfolio.html" class="btn-white">Explore Projects</a>
+      <a href="#contact-s" class="btn-gw">Let's Talk</a>
+    </div>
+  </div>
+  <div class="port-num">05</div>
+</div>
+</div>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<div id="contact-s">
+<div class="sw">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="cta-heading">Let's work<br><em>together.</em></div>
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.75;max-width:360px;">Open to full-time roles in data analytics and AI/ML, collaborations, and networking. Don't be shy!</p>
+      <div class="contact-links">
+        <a class="cl" href="mailto:brulp2003@gmail.com"><div class="cl-ic">✉</div>brulp2003@gmail.com</a>
+        <a class="cl" href="tel:3058989684"><div class="cl-ic">☎</div>305-898-9684</a>
+        <a class="cl" href="https://www.linkedin.com/in/bruna-lelis-do-prado" target="_blank"><div class="cl-ic">in</div>linkedin.com/in/bruna-lelis-do-prado</a>
+        <a class="cl" href="https://github.com/bl24f" target="_blank"><div class="cl-ic">gh</div>github.com/bl24f</a>
+        <a class="cl" href="#"><div class="cl-ic">📍</div>Florida, USA · Open to Relocation</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="cf-title">Send a Message</div>
+        <div class="form-row">
+          <div class="fg"><label>First Name *</label><input type="text" placeholder="Jane" required></div>
+          <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+        </div>
+        <div class="fg"><label>Email *</label><input type="email" placeholder="jane@example.com" required></div>
+        <div class="fg"><label>Message</label><textarea rows="5" placeholder="What's on your mind?"></textarea></div>
+        <button type="submit" class="btn-purple" style="align-self:flex-start;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<footer>
+  <span class="footer-logo">BL.</span>
+  <span class="footer-copy">© 2026 Bruna Lelis do Prado · Made with love in Florida</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/bruna-lelis-do-prado" target="_blank">LinkedIn</a>
+    <a href="https://github.com/bl24f" target="_blank">GitHub</a>
+    <a href="mailto:brulp2003@gmail.com">Email</a>
+  </div>
+</footer>
+
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((e)=>{e.forEach((el,i)=>{if(el.isIntersecting){setTimeout(()=>el.target.classList.add('visible'),i*80);obs.unobserve(el.target);}});},{threshold:.07});
+reveals.forEach(r=>obs.observe(r));
+function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('button[type=submit]');b.textContent='Sent!';b.style.background='#7c3aed';setTimeout(()=>{b.textContent='Send Message';b.style.background='';},3000);}
+</script>
+
+</body>
+</html>
