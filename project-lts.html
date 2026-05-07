@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LTS Studio — Get Comfy and Go Beyond - Bruna Lelis do Prado</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0ecfa;--bg2:#e8e0f5;--surface:#fff;--deep:#1a0533;--accent:#7c3aed;--accent2:#a855f7;--light:#e9d5ff;--muted:#7c6f9a;--text:#1a0533;--radius:16px;--shadow:0 8px 32px rgba(124,58,237,.13);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3.5rem;background:rgba(240,236,250,0.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(124,58,237,.1);}
+.nav-logo{font-family:'Unbounded',sans-serif;font-size:.85rem;color:var(--deep);text-decoration:none;letter-spacing:.05em;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.78rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.btn-purple{display:inline-block;background:var(--accent);color:#fff;padding:.85rem 2.2rem;border-radius:99px;font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .3s;border:none;cursor:pointer;}
+.btn-purple:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.4);}
+.btn-ghost{display:inline-block;background:transparent;color:var(--deep);padding:.85rem 2.2rem;border-radius:99px;border:2px solid rgba(26,5,51,.2);font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .3s;}
+.btn-ghost:hover{background:var(--deep);color:#fff;transform:translateY(-2px);}
+footer{background:var(--deep);padding:2.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:'Unbounded',sans-serif;font-size:.85rem;color:#fff;}
+.footer-links{display:flex;gap:2rem;}
+.footer-links a{font-size:.75rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:#fff;}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.35);}
+@media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2rem 1.5rem;}}
+</style>
+<style>
+.proj-hero{min-height:52vh;display:flex;align-items:flex-end;padding-top:80px;position:relative;overflow:hidden;}
+.proj-hero-inner{max-width:1200px;margin:0 auto;padding:4rem 3.5rem;width:100%;position:relative;z-index:1;}
+.proj-emoji-bg{position:absolute;right:5%;top:50%;transform:translateY(-50%);font-size:clamp(8rem,18vw,16rem);opacity:.12;pointer-events:none;z-index:0;}
+.proj-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.8rem;}
+.proj-title{font-family:'Unbounded',sans-serif;font-size:clamp(1.8rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.05;margin-bottom:.8rem;}
+.proj-sub{font-size:1rem;color:rgba(255,255,255,.7);font-weight:500;margin-bottom:1.5rem;}
+.proj-meta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+.proj-period{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.06em;}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tag{font-size:.66rem;font-weight:600;padding:.3rem .85rem;border-radius:99px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);}
+.proj-body{max-width:1200px;margin:0 auto;padding:4rem 3.5rem;display:grid;grid-template-columns:1fr 320px;gap:4rem;align-items:start;}
+.section-label{font-family:'Unbounded',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;margin-top:2rem;}
+.section-label:first-child{margin-top:0;}
+.proj-overview{font-size:.97rem;color:var(--text);line-height:1.85;margin-bottom:2.5rem;}
+.proj-bullets{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.proj-bullets li{font-size:.9rem;color:var(--text);padding-left:1.4rem;position:relative;line-height:1.7;}
+.proj-bullets li::before{content:'2BC';content:'▸';position:absolute;left:0;color:var(--accent);font-weight:700;}
+.proj-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;}
+.proj-visual{border-radius:20px;height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;margin-bottom:2rem;}
+.proj-sidebar{display:flex;flex-direction:column;gap:1.1rem;position:sticky;top:100px;}
+.side-card{background:var(--surface);border:1px solid rgba(124,58,237,.12);border-radius:var(--radius);padding:1.4rem;}
+.side-label{font-family:'Unbounded',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;}
+.side-val{font-size:.84rem;font-weight:600;color:var(--deep);line-height:1.5;}
+.side-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.side-tag{font-size:.63rem;font-weight:600;padding:.25rem .7rem;border-radius:99px;background:rgba(124,58,237,.07);color:var(--accent);border:1px solid rgba(124,58,237,.16);}
+.proj-nav{background:var(--deep);padding:2.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;}
+.pnav-item{text-decoration:none;}
+.pnav-dir{font-size:.63rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem;}
+.pnav-name{font-family:'Unbounded',sans-serif;font-size:.86rem;font-weight:700;color:#fff;transition:color .2s;}
+.pnav-item:hover .pnav-name{color:var(--accent2);}
+@media(max-width:860px){.proj-body{grid-template-columns:1fr;gap:2rem;}.proj-sidebar{position:static;}.proj-hero-inner{padding:3rem 1.5rem;}.proj-nav{padding:2rem 1.5rem;}}
+</style>
+</head><body>
+<nav>
+  <a class="nav-logo" href="index.html">BL.</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about-s">About</a></li>
+    <li><a href="index.html#skills-s">Skills</a></li>
+    <li><a href="index.html#exp-s">Experience</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="index.html#contact-s">Contact</a></li>
+  </ul>
+</nav>
+<div class="proj-hero" style="background:linear-gradient(135deg,#3b0764,#7c3aed);">
+  <div class="proj-emoji-bg">🎨</div>
+  <div class="proj-hero-inner">
+    <div class="proj-eyebrow">LIS 4351 · Social Media Management</div>
+    <div class="proj-title">LTS Studio — Get Comfy and Go Beyond</div>
+    <div class="proj-sub">Full social media campaign for a modern streetwear brand</div>
+    <div class="proj-meta">
+      <span class="proj-period">Fall 2025 · FSU</span>
+      <div class="tags"><span class="tag">Content Strategy</span> <span class="tag">Social Media</span> <span class="tag">Brand Identity</span> <span class="tag">Instagram</span> <span class="tag">Twitter</span></div>
+    </div>
+  </div>
+</div>
+<div class="proj-body">
+  <div class="reveal">
+    <div class="proj-visual" style="background:linear-gradient(135deg,#3b0764,#7c3aed)22;">🎨</div>
+    <div class="section-label">Project Overview</div>
+    <p class="proj-overview">Developed a complete social media campaign for LTS Studio, a modern streetwear brand built around comfort, confidence, and individuality. The campaign required building the brand voice from scratch, defining target audience personas, and creating a content strategy designed to grow engagement organically across Instagram and Twitter.</p>
+    <div class="section-label">Key Contributions</div>
+    <ul class="proj-bullets"><li>Defined brand tone, personality, and content pillars aligned with LTS Studio's streetwear identity</li> <li>Created detailed target audience personas based on demographics, psychographics, and shopping behavior</li> <li>Developed platform-specific content calendars for Instagram and Twitter with copy and visual direction</li> <li>Analyzed 5+ competitor accounts and proposed differentiation strategies based on engagement data</li> <li>Designed a hashtag strategy and engagement loop to drive community interaction</li></ul>
+    <div class="proj-links"><a href="https://bl24f6.wixsite.com/interactive-resume/s-projects-basic" target="_blank" class="btn-purple">View on Wix</a><a href="index.html#contact-s" class="btn-ghost">Discuss Project</a></div>
+  </div>
+  <div class="proj-sidebar reveal">
+    <div class="side-card"><div class="side-label">Course</div><div class="side-val">LIS 4351 · Social Media Management</div></div>
+    <div class="side-card"><div class="side-label">Timeline</div><div class="side-val">Fall 2025 · FSU</div></div>
+    <div class="side-card"><div class="side-label">Skills Used</div><div class="side-tags"><span class="side-tag">Content Strategy</span> <span class="side-tag">Social Media</span> <span class="side-tag">Brand Identity</span> <span class="side-tag">Instagram</span> <span class="side-tag">Twitter</span></div></div>
+    <a href="portfolio.html" class="btn-purple" style="text-align:center;">All Projects</a>
+  </div>
+</div>
+<div class="proj-nav"><a href="project-social.html" class="pnav-item"><div class="pnav-dir">Previous</div><div class="pnav-name">FL Universities Social Media</div></a><a href="project-nff.html" class="pnav-item" style="text-align:right;"><div class="pnav-dir">Next</div><div class="pnav-name">North Florida Fair Redesign</div></a></div>
+<footer>
+  <span class="footer-logo">BL.</span>
+  <span class="footer-copy">2026 Bruna Lelis do Prado</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/bruna-lelis-do-prado" target="_blank">LinkedIn</a>
+    <a href="https://github.com/bl24f" target="_blank">GitHub</a>
+    <a href="mailto:brulp2003@gmail.com">Email</a>
+  </div>
+</footer><script>
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((e)=>{e.forEach((el,i)=>{if(el.isIntersecting){setTimeout(()=>el.target.classList.add('visible'),i*80);obs.unobserve(el.target);}});},{threshold:.07});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body></html>
