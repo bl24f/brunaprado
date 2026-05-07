@@ -408,6 +408,32 @@ footer{background:var(--deep);padding:2.5rem 3.5rem;display:flex;justify-content
   .bc.wide{grid-column:span 1;}
   .form-row{grid-template-columns:1fr;}
 }
+
+/* FLOATING RESUME BUTTON */
+.resume-fab{
+  position:fixed;
+  bottom:2rem;right:2rem;
+  z-index:999;
+  background:var(--deep);
+  color:#fff;
+  font-family:'Sora',sans-serif;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-decoration:none;
+  padding:.75rem 1.4rem;
+  border-radius:99px;
+  display:flex;align-items:center;gap:.5rem;
+  box-shadow:0 8px 28px rgba(26,5,51,.35);
+  transition:all .3s;
+  border:2px solid transparent;
+}
+.resume-fab:hover{
+  background:var(--accent);
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(124,58,237,.45);
+}
+.resume-fab-icon{font-size:1rem;}
 </style>
 </head>
 <body>
@@ -695,5 +721,10 @@ reveals.forEach(r=>obs.observe(r));
 function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('button[type=submit]');b.textContent='Sent!';b.style.background='#7c3aed';setTimeout(()=>{b.textContent='Send Message';b.style.background='';},3000);}
 </script>
 
+
+<!-- FLOATING RESUME BUTTON -->
+<a class="resume-fab" href="resume.pdf" target="_blank">
+  <span class="resume-fab-icon">📄</span> View Resume
+</a>
 </body>
 </html>
